@@ -272,12 +272,12 @@ if submitted:
         # 'Depressed (1)' triggers a red alert theme.
         if "Not Depressed" in prediction:
             border_color = "#00CC96"  # Emerald Green
-            header_text = "🎉 Analysis Complete: Low Risk"
+            header_text = "🎉 Analysis Complete"
             header_color = "#00CC96"
             status_color = "#00CC96"
         else:
             border_color = "#FF4B4B"  # Alert Red
-            header_text = "⚠️ Analysis Complete: High Risk"
+            header_text = "⚠️ Analysis Complete"
             header_color = "#FF4B4B"
             status_color = "#FF4B4B"
 
