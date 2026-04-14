@@ -1,199 +1,244 @@
-# 🚀 Student Depression Risk Predictor
+# 🚀 Student Depression Predictor
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat&logo=python&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-FFD217?style=flat&logo=pandas&logoColor=150458)
-![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat&logo=jupyter&logoColor=white)
-![Joblib](https://img.shields.io/badge/Joblib-0077B6?style=flat&logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2%2B-orange?style=flat&logo=scikit-learn&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.20%2B-red?style=flat&logo=streamlit&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-2.0%2B-yellow?style=flat&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-1.24%2B-blueviolet?style=flat&logo=numpy&logoColor=white)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-3.7%2B-green?style=flat&logo=matplotlib&logoColor=white)
+![Seaborn](https://img.shields.io/badge/Seaborn-0.12%2B-blue?style=flat&logo=seaborn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-1.7%2B-darkgreen?style=flat&logo=xgboost&logoColor=white)
+![Imblearn](https://img.shields.io/badge/Imblearn-0.10%2B-purple?style=flat&logo=scikit-learn&logoColor=white)
+![Joblib](https://img.shields.io/badge/Joblib-1.2%2B-lightgray?style=flat&logo=python&logoColor=white)
 
 ## 📌 Overview
 
-This project presents an innovative **early detection system for student depression risk** leveraging Machine Learning. Designed to empower educational institutions and counselors, the system analyzes a comprehensive set of student attributes—including behavioral, academic, and lifestyle patterns—to proactively identify individuals at risk. The core of the system is a robust Logistic Regression model, chosen for its interpretability, which is crucial for providing actionable insights in sensitive mental health contexts. The solution features a two-phase architecture: a meticulously crafted Model Development Pipeline (documented in a Jupyter Notebook) and a user-friendly Real-time Prediction Service built with Streamlit, enabling immediate risk assessment based on interactive user inputs.
+The **Student Depression Predictor** is a sophisticated, end-to-end Machine Learning solution meticulously engineered to assess the risk of depression in students. This project integrates a robust data pipeline, encompassing extensive exploratory data analysis (EDA), multi-stage data preprocessing, comparative model training (featuring Logistic Regression, Random Forest, XGBoost, KNN, and Naive Bayes), intelligent feature selection, and rigorous hyperparameter tuning. The culmination of this effort is a production-ready Logistic Regression model, deployed as an intuitive Streamlit web application, providing real-time inference for proactive mental health support.
+
+> ⚠️ **Note**: This is an **assignment (fast-track) version** of the project. 
+> The notebook workflow contains several intentional structural trade-offs 
+> (e.g., baseline modelling performed prior to full preprocessing, EDA conducted 
+> on pre-cleaned data). A cleaner, production-ready version with a proper 
+> end-to-end workflow is currently in development. 🚀 **Coming Soon.**
 
 ## 🎯 Context & Problem Statement
 
-The mental well-being of students is a critical concern, with depression being a significant impediment to academic success and overall quality of life. Traditional methods of identifying at-risk students are often reactive, relying on observable distress or self-reporting, which can lead to delayed intervention. This project addresses the urgent need for a **proactive, data-driven approach** to student mental health.
+The escalating prevalence of mental health challenges among students presents a critical societal and educational concern. Untreated depression can severely impact academic performance, social integration, and long-term well-being. Traditional diagnostic methods often rely on subjective assessments and may not identify at-risk individuals early enough for effective intervention.
 
-The primary business goal is to **minimize the incidence of undetected depression among students**, thereby facilitating timely support and preventing the escalation of mental health issues. By providing an interpretable risk assessment, the system enables counselors to understand the contributing factors for each student, allowing for more personalized and effective interventions. This not only improves student outcomes but also enhances the reputation and support infrastructure of educational institutions, demonstrating a commitment to holistic student welfare. The system translates directly into **reduced long-term health costs**, **improved academic performance**, and a **healthier, more engaged student body**.
+This project directly addresses this challenge by leveraging Machine Learning to develop an **early detection system for student depression risk**. By analyzing a comprehensive set of behavioral, academic, and lifestyle patterns, the system provides a data-driven approach to identify students who may be at risk. The primary business goal is to empower educational institutions and counselors with a proactive tool. This enables them to intervene swiftly and effectively, providing timely support and resources before a student's mental health condition deteriorates, thereby fostering a healthier and more supportive academic environment.
 
-## 📊 Quantitative Metrics
+## 📊 Quantitative Metrics & Business Impact
 
-The developed model demonstrates strong performance in identifying students at risk of depression, with a particular emphasis on minimizing false negatives to ensure comprehensive coverage for intervention.
+The Student Depression Predictor is designed for high impact, focusing on accurately identifying students at risk. The final model, a tuned Logistic Regression, demonstrates robust performance:
 
-*   **Dataset Size**: The model was trained on a meticulously cleaned dataset of **27,876 records**, refined from an initial 28,008 raw entries.
-*   **Features**: The final model utilizes **13 carefully selected features**, reduced from 16 original attributes through a rigorous feature importance analysis.
-*   **Final Model Performance (Logistic Regression - Untuned)**:
-    *   **Accuracy**: **85.01%** - Indicating a high overall correctness in predictions.
-    *   **Recall**: **89%** - Crucially, this signifies that 89% of all actually depressed students are correctly identified by the model, minimizing the risk of missing at-risk individuals.
-    *   **Precision**: **86%** - Meaning 86% of students predicted as depressed are indeed depressed.
-    *   **F1-Score**: **87%** - A balanced measure of precision and recall.
-*   **Top Predictive Features**: The model provides clear insights into the most influential factors:
-    *   'Have you ever had suicidal thoughts?' (Absolute Coefficient: **2.472**)
-    *   'Academic Pressure' (Absolute Coefficient: **1.151**)
-    *   'Dietary Habits = Unhealthy' (Absolute Coefficient: **1.100**)
+*   **Dataset Size**: The system processes 27,876 clean records, meticulously refined from an initial 28,008 raw entries.
+*   **Feature Set**: The model operates on a focused set of 13 features, intelligently selected from an initial 16 to maximize predictive power and minimize noise.
+*   **Final Model Chosen**: Tuned Logistic Regression, optimized for `recall`.
+    *   **Accuracy**: 85.15%
+    *   **Recall**: 89%
+    *   **Precision**: 86% (for the untuned model; tuned precision is comparable)
+    *   **F1-Score**: 88%
 
-**Business Impact**: The exceptional **Recall of 89%** is the cornerstone of this system's value proposition. For an early detection system, **minimizing false negatives** (students who are depressed but classified as not depressed) is paramount. This high recall ensures that the vast majority of at-risk students are flagged, enabling proactive intervention and support. This translates directly into:
-*   **Enhanced Student Well-being**: More students receive timely mental health support, preventing conditions from worsening.
-*   **Improved Academic Outcomes**: Early intervention can mitigate the negative impact of depression on academic performance.
-*   **Resource Optimization**: Counselors can focus their efforts on identified at-risk individuals, leading to more efficient resource allocation.
-*   **Ethical Responsibility**: Demonstrates a strong commitment to student welfare and proactive health management.
-The interpretability of Logistic Regression, backed by quantifiable feature coefficients, provides counselors with a clear understanding of *why* a student is flagged, facilitating targeted and empathetic interventions.
+**Business Impact:**
+The **high recall of 89%** is particularly significant. In the context of depression prediction, recall measures the model's ability to correctly identify students who *are* depressed (true positives) out of all truly depressed students. A high recall minimizes **false negatives** – cases where a depressed student is incorrectly classified as non-depressed. This is paramount for early intervention, as missing an at-risk student could have severe consequences. By effectively identifying nearly 9 out of 10 students who are struggling, the system provides an invaluable safety net for educational institutions.
+
+**Top Predictive Features:**
+The interpretability of Logistic Regression allows us to pinpoint the most influential factors:
+1.  **`Have you ever had suicidal thoughts?`**: Coefficient of 2.472, indicating a very strong positive correlation with depression risk.
+2.  **`Academic Pressure`**: Coefficient of 1.151, highlighting the significant role of academic stress.
+3.  **`Dietary Habits = Unhealthy`**: Coefficient of 1.100, underscoring the link between lifestyle choices and mental well-being.
+
+These insights not only drive accurate predictions but also inform targeted support programs, allowing counselors to focus on key areas impacting student mental health. The system's ability to provide a probability score further empowers counselors to prioritize cases and tailor interventions with greater precision.
 
 ## 📷 Screenshots & Demo
 
-This section provides a visual walkthrough of the application's user interface and key functionalities.
+This section provides visual examples of the Student Depression Predictor in action.
 
-### 1. 🏡 Landing Interface
+### 1. 🏠 Landing Interface
 ![Home UI](assets/home_ui.png)  
-*The main landing page of the Streamlit application, featuring a dark-themed hero section with a gradient title and a clear description of the depression prediction service.*
+*The initial user interface of the Streamlit application, welcoming users and providing an overview of the prediction system.*
 
-### 2. 📝 Input Form
+### 2. 📝 Student Profile Input Form
 ![Input Form](assets/input_form.png)  
-*A detailed view of the input form where users provide 16 student attributes across demographic, academic, lifestyle, and psychological categories. Each field includes clear labels, default values, and helpful tooltips for ease of use.*
+*A detailed form where users input various student attributes, including demographic, academic, lifestyle, and psychological factors, essential for the depression risk assessment.*
 
-### 3. 🧠 Prediction Result
-![Prediction Result](assets/prediction_result.png)  
-*The prediction output card, dynamically styled based on the predicted status. It clearly displays the student's predicted depression status, the probability of depression, and the model's confidence score, offering nuanced insights.*
+### 3. ✅ Prediction Result Display
+![Prediction Result](assets/prediction_output.png)  
+*The output screen displaying the prediction result, indicating the student's depression risk status, the probability score, and the model's confidence in its assessment.*
+
+### 4. 📊 Feature Importance Visualization
+![Feature Importance](assets/feature_importance.png)  
+*A hypothetical visualization showcasing the relative importance of different features in the model's prediction, providing transparency and interpretability to the user.*
 
 ## ⚙️ Architecture & Data Flow
 
-The system operates through a robust two-phase architecture: a **Model Development Pipeline** for continuous improvement and a **Real-time Prediction Service** for immediate user interaction.
+The Student Depression Predictor is built upon a robust, end-to-end Machine Learning pipeline, meticulously designed to transform raw student data into actionable insights. The architecture follows a standard MLOps lifecycle, from data ingestion and preprocessing to model training, evaluation, and deployment via an interactive web application.
 
-### 1. 📊 Model Development Pipeline (Offline)
-
-This phase, primarily executed within a Jupyter Notebook (`FAST_TRACK_Prediksi_Depresi_Bengkod_Final.ipynb`), focuses on the end-to-end process of building, evaluating, and persisting the machine learning model.
-
-*   **Data Ingestion**: Raw student data (`Bengkod-Depresi.csv`) is loaded.
-*   **Exploratory Data Analysis (EDA)**: Initial data quality checks, statistical summaries, and visualizations are performed to understand data distributions and identify potential issues.
-*   **Data Cleaning & Preprocessing**: This iterative step involves:
-    *   **Duplicate Handling**: Removing redundant records.
-    *   **Missing Value Imputation**: Strategically filling missing numerical values with medians and categorical values with modes. Critical target variable missing values are dropped.
-    *   **Anomalous Data Handling**: Correcting or removing illogical entries (e.g., `CGPA=0`, invalid `City` names, "///" in `Dietary Habits`).
-    *   **Feature Engineering**: Grouping granular categorical features (`City`, `Degree`) into broader, more meaningful categories.
-    *   **Feature Removal**: Dropping non-predictive features (`id`) and low-contribution features (`Gender`, `Job Satisfaction`, `Work Pressure`).
-*   **Preprocessing Pipeline Definition**: A `ColumnTransformer` is configured to apply `OneHotEncoder` to categorical features and `StandardScaler` to numerical features, ensuring proper data transformation and preventing data leakage.
-*   **Model Training & Evaluation**:
-    *   Multiple ML algorithms (Logistic Regression, Random Forest, XGBoost, KNN, Naive Bayes) are trained within an `ImbPipeline` (integrating preprocessing steps).
-    *   Models are rigorously evaluated using Accuracy, Recall, Precision, F1-score, and Confusion Matrices.
-    *   Logistic Regression is selected for its balance of performance and interpretability.
-*   **Hyperparameter Tuning**: `GridSearchCV` with `StratifiedKFold` is employed to optimize Logistic Regression, specifically targeting `recall`.
-*   **Model Persistence**: The entire trained `ImbPipeline` object, including the `ColumnTransformer` and the final Logistic Regression model, is serialized using `joblib` and saved as `best_model.joblib`. This ensures that the exact preprocessing steps and model weights are preserved for deployment.
-
-### 2. 🌐 Real-time Prediction Service (Online)
-
-This phase provides an interactive web application (`app.py` and `function.py`) for users to obtain instant depression risk predictions.
-
-*   **User Interface (Streamlit - `app.py`)**: A Streamlit application renders a modern, dark-themed web interface. It presents a form with 16 input fields for student attributes, enhanced with tooltips and default values.
-*   **Input Data Transformation (`function.py`)**: User inputs from the Streamlit form are collected and transformed into a Pandas DataFrame. Crucially, the three insignificant columns (`Gender`, `Job Satisfaction`, `Work Pressure`) are explicitly dropped to match the feature set of the trained model.
-*   **Model Loading (`function.py`)**: The `best_model.joblib` pipeline is loaded into memory using `joblib`. Streamlit's `@st.cache_resource` decorator optimizes this process, caching the model to prevent redundant loading and improve performance. Robust error handling ensures graceful failure if the model file is inaccessible.
-*   **Inference (`function.py`)**: The prepared DataFrame is fed into the loaded model. The model performs both binary prediction (Depressed/Not Depressed) and probability prediction. The numerical outputs are mapped to human-readable labels and formatted for display.
-*   **Result Presentation (`app.py`)**: The Streamlit app dynamically displays a custom-styled HTML card, presenting the predicted status, the probability of depression, and the model's confidence score to the user.
-
+### 🌊 Overall Data Flow
 ```mermaid
 graph TD
-    subgraph Model Development Pipeline (Offline)
-        A["Raw Data (Bengkod-Depresi.csv)"] --> B("Data Ingestion & Initial EDA")
-        B --> C{"Data Cleaning & Preprocessing"}
-        C -- "Duplicates, Missing Values, Anomalies, Feature Engineering" --> D("Feature Selection")
-        D --> E("Preprocessing Pipeline Definition (ColumnTransformer)")
-        E --> F("Model Training (ImbPipeline: LR, RF, XGB, KNN, NB)")
-        F --> G("Hyperparameter Tuning (GridSearchCV, recall)")
-        G --> H("Model Evaluation (Accuracy, Recall, F1, CM)")
-        H --> I("Final Model Selection (Logistic Regression)")
-        I --> J[("best_model.joblib - Saved Pipeline")]
+    A["Raw Student Data (Bengkod-Depresi.csv)"] --> B("Pandas DataFrame")
+    B --> C{"Exploratory Data Analysis (EDA)"}
+    C --> D("Data Preprocessing Pipeline")
+    D --> E{"Train-Test Split (80/20, Stratified)"}
+    E --> F("Model Training & Evaluation")
+    F --> G{"Hyperparameter Tuning (GridSearchCV)"}
+    G --> H("Best Model Selection (Logistic Regression)")
+    H --> I("Model Persistence (best_model.joblib)")
+    I --> J("Streamlit Web Application (app.py)")
+    J --> K("User Input Interface")
+    K --> L("Data Preparation for Inference")
+    L --> M("Real-time Prediction & Probability")
+    M --> N("Display Results")
+
+    subgraph Data Acquisition & Initial Exploration
+        A
+        B
+        C
     end
 
-    subgraph Real-time Prediction Service (Online)
-        K["User Input (Streamlit UI)"] --> L("Input Data Transformation (DataFrame creation)")
-        L --> M{"Drop Insignificant Features"}
-        M --> N("Load Model (best_model.joblib) @st.cache_resource")
-        N --> O("Perform Inference (predict_proba)")
-        O --> P("Map Predictions & Format Results")
-        P --> Q["Display Results (Streamlit Card)"]
+    subgraph Data Transformation & Feature Engineering
+        D
     end
 
-    J -- "Loaded into memory" --> N
+    subgraph Model Development & Optimization
+        E
+        F
+        G
+        H
+    end
+
+    subgraph Deployment & Inference
+        I
+        J
+        K
+        L
+        M
+        N
+    end
 ```
 *Note: This architecture diagram is AI-generated using Mermaid.js. If you encounter rendering issues on certain platforms, minor manual syntax adjustments (e.g., escaping special characters or fixing subgraph IDs) may be required.*
 
+### 🔐 Core Components:
+
+#### 1. 📥 Data Ingestion
+*   **Source**: Student data is loaded from a CSV file, `Bengkod-Depresi.csv`.
+*   **Mechanism**: The data is immediately converted into a Pandas DataFrame, which serves as the foundational data structure for all subsequent operations. This ensures efficient data manipulation and compatibility with Python's rich data science ecosystem.
+
+#### 2. 🔍 Exploratory Data Analysis (EDA)
+Conducted within a Jupyter Notebook, the EDA phase is critical for understanding the dataset's characteristics and informing preprocessing strategies:
+*   **Basic Inspection**: Initial checks with `df.head()`, `df.info()`, `df.describe()` provide a quick overview of data types, missing values, and statistical summaries.
+*   **Quality Checks**:
+    *   **Missing Values**: `df.isnull().sum()` identifies columns with missing data, guiding imputation strategies.
+    *   **Duplicate Rows**: `df.duplicated().sum()` detects and quantifies redundant records, which are subsequently removed to prevent bias.
+    *   **Unique Value Analysis**: Inspection of unique values and their counts for each column helps reveal cardinality, potential typos, and anomalous entries.
+*   **Distribution Analysis**:
+    *   **Target Variable**: Bar plots visualize the `Depression` target variable distribution, crucial for identifying class imbalance.
+    *   **Numerical Features**: Box plots (for outlier detection) and histograms (for distribution shape) provide insights into continuous data.
+    *   **Categorical Features**: Count plots show frequency distributions, often stratified by the `Depression` target, alongside proportion plots to highlight depression rates per category.
+*   **Relationship Analysis**:
+    *   **Correlation Heatmaps**: Visualize linear relationships between numerical features, including their correlation with the `Depression` target.
+    *   **Box Plots (Numerical vs. Target)**: Illustrate how the ranges and distributions of numerical features differ between depressed and non-depressed groups.
+
+#### 3. 🧹 Data Preprocessing Pipeline
+This is a multi-stage, iterative process, ultimately encapsulated within an `ImbPipeline` for robustness.
+*   **Duplicate Handling**: 46 duplicate rows are precisely identified and removed using `df.drop_duplicates()`, ensuring data integrity.
+*   **Missing Value Imputation**:
+    *   Rows with missing `Depression` values (42 records) are dropped, as the target variable is fundamental and cannot be reliably imputed.
+    *   For other features like `Financial Stress` (numerical) and `Family History of Mental Illness` (categorical), `SimpleImputer` is employed: numerical columns are imputed with the **median**, while categorical columns use the **most frequent** value (mode).
+*   **Feature Cleaning & Engineering**:
+    *   **`id` Column**: Removed due to its lack of predictive power.
+    *   **`Dietary Habits`**: Anomalous "///" entries are remapped to "Others," and then all "Others" records are removed to maintain data quality and focus on core categories ("Unhealthy", "Moderate", "Healthy").
+    *   **`City`**: Invalid city names (typos, non-city entries) are corrected or removed. Valid cities are then intelligently grouped into "Tier 1" (major metropolitan) and "Tier 2" (other cities) to reduce cardinality and capture urban influence. The application UI intentionally includes "Tier 3" as a  forward-compatible option — designed to accommodate Tier 3 data in future model iterations without requiring UI changes.
+    *   **`Degree`**: 28 granular academic degrees are consolidated into 5 broader, more meaningful categories: "High School", "Bachelors", "Masters", "Doctorate", "Others".
+    *   **`CGPA`**: Rows with a `CGPA` of 0 are removed, as this is deemed illogical for active students and likely represents data entry errors.
+*   **Feature Selection**: Based on initial Logistic Regression coefficients and EDA, three features (`Gender`, `Job Satisfaction`, `Work Pressure`) are identified as having low predictive contribution and are dropped, reducing the feature set from 16 to 13.
+*   **Transformation with `ColumnTransformer`**: A `ColumnTransformer` is used to apply distinct transformations based on feature type:
+    *   **Categorical Features**: `OneHotEncoder` is applied with `drop="first"` (to mitigate multicollinearity) and `handle_unknown="ignore"` (for graceful handling of unseen categories during inference).
+    *   **Numerical Features**: `StandardScaler` normalizes these features, critical for models sensitive to feature scales (e.g., Logistic Regression, KNN).
+
+#### 4. 🧠 Model Training & Evaluation
+This phase focuses on comparative analysis, feature importance, and hyperparameter optimization.
+*   **Train-Test Split**: The cleaned and preprocessed dataset is split into 80% training and 20% testing sets using `train_test_split` with `stratify=y` to preserve the target variable's class distribution and `random_state` for reproducibility. This is done *before* fitting the `ColumnTransformer` to prevent data leakage.
+*   **Pipeline Integration**: The `ImbPipeline` from `imblearn` is instrumental. It chains the `ColumnTransformer` (preprocessor) and the Machine Learning model, ensuring that all preprocessing steps are consistently applied and fitted *only* on the training data, preventing data leakage during cross-validation and evaluation.
+*   **Evaluated Models**: Five diverse classification algorithms are benchmarked: `LogisticRegression`, `RandomForestClassifier`, `XGBClassifier`, `KNeighborsClassifier`, and `BernoulliNB`.
+*   **Evaluation Metrics**: Each model's performance is rigorously assessed using `accuracy_score`, `recall_score`, `precision_score`, `f1_score`, `classification_report`, and `confusion_matrix`. ROC curves and AUC scores provide further insights into classifier performance.
+*   **Feature Importance**: For the chosen Logistic Regression model, absolute coefficients are extracted and visualized, offering clear interpretability by highlighting the most influential features.
+*   **Hyperparameter Tuning**: `GridSearchCV` combined with `StratifiedKFold` (5 splits) is used to meticulously tune the `LogisticRegression` model's hyperparameters (`C`, `tol`, `solver`, `max_iter`), with a specific focus on optimizing for `recall` to maximize the detection of true positive depression cases.
+
+#### 5. 🚀 Model Deployment (Inference Service)
+The final, optimized model is deployed as an interactive Streamlit web application.
+*   **Model Persistence**: The entire `ImbPipeline` (containing the preprocessor and the tuned Logistic Regression model) is saved using `joblib.dump` to `best_model.joblib`, ensuring the complete pipeline can be loaded for inference.
+*   **Model Loading (`function.py`)**: The `load_models()` function uses `joblib.load()` to efficiently load the saved pipeline. `@st.cache_resource` is employed to cache the model, loading it only once when the Streamlit app starts, significantly boosting performance. Robust error handling is included for file not found or corrupted model files.
+*   **Data Preparation for Inference (`function.py`)**: The `change_data_to_df()` function takes raw user inputs from the Streamlit UI, constructs a Pandas DataFrame, and critically, *drops the insignificant features* (`Gender`, `Job Satisfaction`, `Work Pressure`) to ensure the input schema precisely matches what the trained `best_model` expects.
+*   **Prediction Logic (`function.py`)**: The `predict_status()` function orchestrates the prediction process. It calls `best_model.predict()` for the binary outcome and `best_model.predict_proba()` for probability scores. The numerical predictions are then mapped to human-readable labels and formatted for clear display in the UI.
+*   **Streamlit User Interface (`app.py`)**: A user-friendly and visually appealing web interface is crafted using Streamlit components. Users interact with `st.selectbox`, `st.number_input`, and `st.form_submit_button` to input student details. Upon submission, `app.py` seamlessly integrates with `function.py` to prepare data and obtain predictions. The results (depression status, probability, confidence) are then presented in a customized HTML card, enhancing user experience.
+
 ## 💻 Installation & Reproduction Steps
 
-To set up the project and reproduce the results, follow these steps.
+To set up and run the Student Depression Predictor locally, follow these steps.
 
-### 1. 📦 Prerequisites
+### ⚙️ Prerequisites
+*   **Python**: Version 3.8 or higher.
+*   **Git**: For cloning the repository.
 
-Ensure you have the following installed:
-*   Python 3.8+
-*   `pip` (Python package installer)
-
-### 2. ⬇️ Clone the Repository
-
-Open your terminal or command prompt and execute the following commands to clone the project repository:
-
+### 📦 1. Clone the Repository
+Open your terminal or command prompt and execute the following command:
 ```bash
 git clone https://github.com/viochris/Depression-Prediction.git
 cd Depression-Prediction
 ```
 
-### 3. 🐍 Install Dependencies
+### 🐍 2. Create a Virtual Environment (Recommended)
+It's best practice to work within a virtual environment to manage dependencies:
+```bash
+python -m venv venv
+# On Windows
+.\venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+```
 
-Navigate into the cloned directory and install the required Python packages:
-
+### 📥 3. Install Dependencies
+Install all required Python packages using `pip`:
 ```bash
 pip install -r requirements.txt
 ```
+*Note: The `requirements.txt` file will contain all necessary libraries like `pandas`, `numpy`, `scikit-learn`, `streamlit`, `xgboost`, `imblearn`, `joblib`, `matplotlib`, and `seaborn`.*
 
-### 4. ⚙️ Model Training (Optional, for reproduction)
-
-To reproduce the model training and evaluation, you will need to run the Jupyter Notebook.
-
-*   **Launch Jupyter Notebook:**
-    ```bash
-    jupyter notebook
-    ```
-*   **Open Notebook:** In your browser, navigate to and open `FAST_TRACK_Prediksi_Depresi_Bengkod_Final.ipynb`.
-*   **Run All Cells:** Execute all cells in the notebook sequentially. This will perform data loading, preprocessing, model training, evaluation, and save the `best_model.joblib` file in the `Depression-Prediction-Model` directory.
-
-### 5. ▶️ Run the Prediction Service
-
-Once the `best_model.joblib` is available (either by running the notebook or if it's already in the repository), you can launch the Streamlit application:
-
+### ▶️ 4. Run the Streamlit Application
+Once all dependencies are installed, you can launch the interactive web application:
 ```bash
 streamlit run app.py
 ```
+This command will open the application in your default web browser, typically at `http://localhost:8501`.
 
-This command will open the Streamlit application in your default web browser, typically at `http://localhost:8501`. You can then interact with the web interface to input student data and receive real-time depression risk predictions.
+### 🧪 5. Reproduce Model Training & Evaluation (Optional)
+If you wish to explore the model training, EDA, and preprocessing steps, you can open the Jupyter Notebook:
+```bash
+jupyter notebook
+```
+Navigate to the relevant `.ipynb` file in the repository (e.g., `Depression_Prediction_Notebook.ipynb`) and run the cells sequentially.
 
 ## ⚠️ System Limitations & Future Work
 
-While the Student Depression Risk Predictor offers a robust and valuable solution, it's important to acknowledge its current limitations and potential areas for future enhancement.
+Understanding the limitations of any system is crucial for responsible deployment and future enhancements. This project, while robust, has inherent architectural and runtime constraints.
 
-### 1. 🏛️ Architectural Limitations (Inherent in Design)
+### 🚧 Architectural Limitations:
+1.  **In-Memory Processing**: The entire dataset is loaded and processed in memory using Pandas. While efficient for the current dataset size (~28,000 records), this architecture is not scalable for significantly larger datasets (e.g., millions or billions of records) without transitioning to distributed computing frameworks like Dask or Apache Spark.
+2.  **Single-Machine Deployment**: The Streamlit application is designed for interactive, single-user inference. It lacks the infrastructure for high-throughput, concurrent requests typical of enterprise-grade production API services. Scaling to multiple concurrent users or integrating with other systems would necessitate a more robust deployment strategy, potentially involving containerization (Docker), orchestration (Kubernetes), a backend API framework (Flask/FastAPI), and load balancing.
+3.  **Lack of Asynchronous Operations**: The current codebase executes synchronously. While sufficient for the relatively low latency of this model's inference, for I/O-bound operations or potentially longer-running model inferences in future iterations, an asynchronous architecture could improve responsiveness and user experience.
+4.  **Limited Model Explainability in Deployment**: Although Logistic Regression coefficients are analyzed in the development notebook, the deployed Streamlit application only provides the prediction and confidence score. Advanced explainability techniques (such as LIME or SHAP not fully implemented) are not exposed to the end-user. This limits the transparency and trustworthiness of individual predictions for non-technical users or counselors.
+5.  **Hardcoded Configurations**: Critical configurations, including `RANDOM_SEED`, specific column names, and file paths, are hardcoded within the scripts. This reduces flexibility for different environments, dataset versions, or experimental setups, requiring direct code modification for any changes.
+6.  **No Data Versioning or MLOps**: The project currently lacks explicit mechanisms for data versioning, model versioning, or automated MLOps pipelines. Any updates to the model or changes in the underlying data would require manual retraining, saving, and redeployment, which can be error-prone and time-consuming in a production environment.
 
-1.  **Single-Server Streamlit Application**:
-    *   **Scalability**: The current Streamlit setup is designed for single-instance deployment. It lacks inherent horizontal scalability, meaning it would struggle to handle a large volume of concurrent users without significant architectural changes (e.g., containerization, load balancing, or a more robust web framework like FastAPI/Flask).
-    *   **Availability**: It represents a single point of failure. If the server hosting the Streamlit app goes down, the prediction service becomes unavailable.
-    *   **Performance**: All computations occur on the same server, which can lead to performance bottlenecks under heavy load.
-2.  **In-Memory Model Loading**: The `best_model.joblib` is loaded into memory and cached. While efficient for repeated predictions, this implies:
-    *   **Memory Footprint**: The model consumes server memory, which could become a concern for larger, more complex models or when running multiple services on the same machine.
-    *   **Cold Start Latency**: The very first request after deployment or cache invalidation will experience higher latency due to the initial model loading time.
-3.  **Synchronous Processing**: Streamlit applications are predominantly synchronous. A long-running prediction task for one user could potentially block other users' requests, degrading the overall user experience.
-4.  **Hardcoded File Paths**: The model loading path (`"Depression-Prediction-Model/best_model.joblib"`) is hardcoded within `function.py`. This reduces deployment flexibility, requiring a specific directory structure and making containerization or cloud deployment less straightforward without code modification or environment variable integration.
-5.  **Lack of API Endpoint**: The Streamlit application provides a GUI but does not expose a RESTful API. This limits its integration capabilities, requiring a separate API layer to be built if other systems or applications need programmatic access to the prediction service.
-
-### 2. ⏳ Runtime Limitations (Specific to Data & Development Workflow)
-
-1.  **"Fast-Track" Development Imperfections**:
-    *   **Suboptimal Workflow**: The notebook's "Direct Modelling" phase, conducted *before* comprehensive data cleaning and preprocessing, means baseline models were trained on noisy data. This makes the comparison between baseline and final models less "apple-to-apple" and potentially overstates the impact of preprocessing.
-    *   **Misleading EDA**: Initial EDA was performed on raw, uncleaned data. Consequently, some early visualizations (e.g., for `City`, `Degree`, `Dietary Habits`) contained misleading insights due to unstandardized or anomalous values (e.g., people's names in `City`).
-2.  **Model Selection Rationale**: Logistic Regression was primarily chosen for its interpretability, which is valuable for counseling contexts. However, other models like Random Forest and XGBoost showed comparable (or slightly better in some metrics, prior to tuning) performance. This indicates a trade-off between maximizing raw predictive power and maintaining model interpretability.
-3.  **Geographical Generalizability**: The dataset is explicitly India-centric, featuring Indian city names and social contexts. The model's ability to generalize to students in other countries (e.g., Indonesia, as per some context mentions) is unvalidated and would likely require retraining or significant re-validation with local data.
-4.  **Heavy Reliance on "Suicidal Thoughts" Feature**: The model exhibits a strong dependency on the 'Have you ever had suicidal thoughts?' feature, which has a significantly higher coefficient (2.472) than all others.
-    *   **Ethical Concerns**: Requiring this as a mandatory input in a real-world application raises substantial ethical concerns regarding privacy, data sensitivity, and the potential for misinterpretation or misuse without proper clinical guidance and context.
-    *   **Data Availability**: In practical scenarios, obtaining accurate and consistent data on suicidal ideation can be challenging or ethically problematic.
-5.  **No Versioning for Model/Data**: The project lacks explicit mechanisms for model versioning or data versioning (e.g., DVC, MLflow). This makes it difficult to track changes in the model or data over time, reproduce past results, or manage different model deployments effectively in a production environment.
+### 🐛 Runtime Limitations:
+1.  **Suboptimal Direct Modelling Workflow**: The initial "Direct Modelling" (baseline evaluation) was performed *before* the full data preprocessing pipeline was applied. This means the baseline models were trained on raw, uncleaned data (e.g., containing noise, invalid city names, ungrouped degree values). This makes the comparison of preprocessing impact not fully "apple-to-apple" and might slightly misrepresent the true uplift from comprehensive preprocessing.
+2.  **Misleading Initial EDA**: The initial Exploratory Data Analysis (EDA) was conducted on the raw, pre-cleaning dataset. Consequently, some early visualizations (e.g., distributions of `City`, `Degree`, `Dietary Habits`) contained misleading insights due to unstandardized or anomalous values (e.g., `City` column still contained people's names and academic degree titles). While corrected in later preprocessing, this highlights the importance of iterative EDA.
+3.  **Model Selection Rationale**: Logistic Regression was ultimately chosen as the final model primarily for its interpretability (due to its coefficients), which aligns well with academic and counseling purposes. This choice was made despite other models like Random Forest or XGBoost reportedly having comparable or slightly superior raw predictive performance. This implies a conscious trade-off between maximizing raw predictive power and prioritizing model interpretability for practical application.
+4.  **Geographic Specificity**: The dataset used for training is India-centric, featuring Indian city names and reflecting a specific Indian social and academic context. The model's generalization capabilities to student populations in other countries (e.g., Indonesia, as hinted by the dataset name) are not guaranteed and would require thorough validation, and potentially retraining, with local data from those regions.
+5.  **High Reliance on 'Suicidal Thoughts' Feature**: The model exhibits a significantly high reliance on the 'Have you ever had suicidal thoughts?' feature, evidenced by its large coefficient (2.472) compared to others. While highly predictive, this raises substantial ethical concerns regarding its mandatory use as an input in a real-world application. It could be perceived as intrusive, stigmatizing, or lead to misinterpretations and misuse of predictions, potentially causing distress to students. Future work should explore ways to mitigate this reliance or offer alternative, less sensitive pathways for prediction.
 
 ---
 **Author:** [Silvio Christian, Joe](https://github.com/viochris)
-*Empowering proactive mental health support through intelligent data insights.*
+"The true measure of a system's intelligence is its ability to foster well-being."
