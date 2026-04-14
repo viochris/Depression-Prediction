@@ -267,23 +267,37 @@ if submitted:
         # Step 2: Run the Logistic Regression model to get prediction and confidence metrics
         prediction, depressed_proba, conf = predict_status(df_testing)
 
-    # Step 3: Display the primary prediction results in a modern, customized HTML card
-    st.markdown(
-        f"""
-        <div style='background-color: #1E1E1E; padding: 25px; border-radius: 12px; border-left: 6px solid #00CC96; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-top: 20px;'>
-            <h3 style='color: #00CC96; margin-top: 0; font-family: sans-serif;'>🎉 Analysis Complete!</h3>
-            <p style='font-size: 16px; color: #E0E0E0; margin-bottom: 5px; font-family: sans-serif;'>Predicted Student Status:</p>
-            <p style='font-size: 32px; font-weight: bold; color: #FFD700; margin-top: 0; margin-bottom: 15px; font-family: monospace;'>
-                {prediction}
-            </p>
-            <hr style='border-color: #333333;'>
-            <p style='color: #A0A0A0; margin-bottom: 5px; font-size: 14px; font-family: sans-serif;'>
-                📊 <strong>Probability of Depression:</strong> {depressed_proba}
-            </p>
-            <p style='color: #A0A0A0; margin-bottom: 0; font-size: 14px; font-family: sans-serif;'>
-                🤖 <strong>Model Confidence Score:</strong> {conf}
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        # Step 3: Configure dynamic UI theme based on the prediction outcome
+        # 'Not Depressed (0)' triggers a green success theme.
+        # 'Depressed (1)' triggers a red alert theme.
+        if "Not Depressed" in prediction:
+            border_color = "#00CC96"  # Emerald Green
+            header_text = "🎉 Analysis Complete: Low Risk"
+            header_color = "#00CC96"
+            status_color = "#00CC96"
+        else:
+            border_color = "#FF4B4B"  # Alert Red
+            header_text = "⚠️ Analysis Complete: High Risk"
+            header_color = "#FF4B4B"
+            status_color = "#FF4B4B"
+
+        # Step 4: Display the primary prediction results in a modern, customized HTML card
+        st.markdown(
+            f"""
+            <div style='background-color: #1E1E1E; padding: 25px; border-radius: 12px; border-left: 6px solid {border_color}; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-top: 20px;'>
+                <h3 style='color: {header_color}; margin-top: 0; font-family: sans-serif;'>{header_text}</h3>
+                <p style='font-size: 16px; color: #E0E0E0; margin-bottom: 5px; font-family: sans-serif;'>Predicted Student Status:</p>
+                <p style='font-size: 32px; font-weight: bold; color: {status_color}; margin-top: 0; margin-bottom: 15px; font-family: monospace;'>
+                    {prediction}
+                </p>
+                <hr style='border-color: #333333;'>
+                <p style='color: #A0A0A0; margin-bottom: 5px; font-size: 14px; font-family: sans-serif;'>
+                    📊 <strong>Probability of Depression:</strong> {depressed_proba}
+                </p>
+                <p style='color: #A0A0A0; margin-bottom: 0; font-size: 14px; font-family: sans-serif;'>
+                    🤖 <strong>Model Confidence Score:</strong> {conf}
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
