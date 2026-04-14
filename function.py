@@ -75,7 +75,7 @@ def change_data_to_df(
 @st.cache_resource
 def load_models():
     """
-    Loads the trained machine learning model and LIME training data.
+    Loads the trained machine learning model training data.
     Includes robust error handling to halt execution safely if files are missing/corrupted.
     """
     try:
@@ -84,7 +84,7 @@ def load_models():
         
     except Exception as e:
         if isinstance(e, FileNotFoundError):
-            st.error("Error: Model files not found. Please ensure 'best_model.joblib' and 'lime_training_data.npy' exist in the 'Depression-Prediction-Model' directory.")
+            st.error("Error: Model files not found. Please ensure 'best_model.joblib' exist in the 'Depression-Prediction-Model' directory.")
         elif isinstance(e, EOFError):
             st.error("Error: Model file is corrupted or incomplete. Please re-export the model from your Jupyter Notebook.")
         else:
