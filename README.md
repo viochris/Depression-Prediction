@@ -33,20 +33,20 @@ The Student Depression Predictor is designed for high impact, focusing on accura
 
 *   **Dataset Size**: The system processes 27,876 clean records, meticulously refined from an initial 28,008 raw entries.
 *   **Feature Set**: The model operates on a focused set of 13 features, intelligently selected from an initial 16 to maximize predictive power and minimize noise.
-*   **Final Model Chosen**: Tuned Logistic Regression, optimized for `recall`.
-    *   **Accuracy**: 85.15%
+**Final Model Chosen**: Logistic Regression (Non-tuned, with Feature Selection), optimized for `recall`.
+    *   **Accuracy**: 84.31%
     *   **Recall**: 89%
-    *   **Precision**: 86% (for the untuned model; tuned precision is comparable)
-    *   **F1-Score**: 88%
+    *   **Precision**: 85%
+    *   **F1-Score**: 87%
 
 **Business Impact:**
 The **high recall of 89%** is particularly significant. In the context of depression prediction, recall measures the model's ability to correctly identify students who *are* depressed (true positives) out of all truly depressed students. A high recall minimizes **false negatives** – cases where a depressed student is incorrectly classified as non-depressed. This is paramount for early intervention, as missing an at-risk student could have severe consequences. By effectively identifying nearly 9 out of 10 students who are struggling, the system provides an invaluable safety net for educational institutions.
 
 **Top Predictive Features:**
 The interpretability of Logistic Regression allows us to pinpoint the most influential factors:
-1.  **`Have you ever had suicidal thoughts?`**: Coefficient of 2.472, indicating a very strong positive correlation with depression risk.
-2.  **`Academic Pressure`**: Coefficient of 1.151, highlighting the significant role of academic stress.
-3.  **`Dietary Habits = Unhealthy`**: Coefficient of 1.100, underscoring the link between lifestyle choices and mental well-being.
+1. `Have you ever had suicidal thoughts?`: Coefficient of 2.496, indicating a very strong positive correlation with depression risk.
+2. `Profession = Working`: Coefficient of 1.740, suggesting that individuals who are already working face compounded pressures from balancing professional and academic responsibilities, significantly elevating their depression risk.
+3. `Academic Pressure`: Coefficient of 1.163, highlighting the significant role of academic stress.
 
 These insights not only drive accurate predictions but also inform targeted support programs, allowing counselors to focus on key areas impacting student mental health. The system's ability to provide a probability score further empowers counselors to prioritize cases and tailor interventions with greater precision.
 
