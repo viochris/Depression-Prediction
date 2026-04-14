@@ -127,7 +127,7 @@ with st.form("depression_prediction_form"):
         # Lifestyle Input: Sleep Habits
         sleep_duration = st.selectbox(
             label="Daily Sleep Duration",
-            options=['Less than 5 hours', '5-6 hours', '7-8 hours', 'More than 8 hours', 'Others'],
+            options=['Less than 5 hours', '5-6 hours', '7-8 hours', 'More than 8 hours'],
             index=2,
             help="Select the average number of hours the student sleeps per night."
         )
@@ -136,10 +136,7 @@ with st.form("depression_prediction_form"):
         profession = st.selectbox(
             label="Primary Occupation",
             options=[
-                'Student', 'Civil Engineer', 'Architect', 'UX/UI Designer',
-                'Digital Marketer', 'Content Writer', 'Educational Consultant', 
-                'Teacher', 'Manager', 'Chef', 'Doctor', 'Lawyer', 
-                'Entrepreneur', 'Pharmacist'
+                'Student', 'Working'
             ],
             index=0,
             help="Select the student's primary job or role. If not working, select 'Student'."
@@ -194,7 +191,7 @@ with st.form("depression_prediction_form"):
         # Academic Input: Current Education Level
         degree = st.selectbox(
             label="Current Degree Program",
-            options=['Bachelors', 'Masters', 'Doctorate', 'High School', 'Others'],
+            options=['Bachelors', 'Masters', 'Doctorate', 'High School'],
             index=1,
             help="Select the academic degree or certification the student is currently pursuing."
         )
