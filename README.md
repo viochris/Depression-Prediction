@@ -67,7 +67,7 @@ This section provides visual examples of the Student Depression Predictor in act
 *The output screen displaying the prediction result, indicating the student's depression risk status, the probability score, and the model's confidence in its assessment.*
 
 ### 4. 📊 Feature Importance Visualization
-![Feature Importance](assets/feature_importance.png)  
+![Feature Importance](assets/feature_importances.png)  
 *A hypothetical visualization showcasing the relative importance of different features in the model's prediction, providing transparency and interpretability to the user.*
 
 ## ⚙️ Architecture & Data Flow
@@ -228,7 +228,7 @@ Understanding the limitations of any system is crucial for responsible deploymen
 1.  **In-Memory Processing**: The entire dataset is loaded and processed in memory using Pandas. While efficient for the current dataset size (~28,000 records), this architecture is not scalable for significantly larger datasets (e.g., millions or billions of records) without transitioning to distributed computing frameworks like Dask or Apache Spark.
 2.  **Single-Machine Deployment**: The Streamlit application is designed for interactive, single-user inference. It lacks the infrastructure for high-throughput, concurrent requests typical of enterprise-grade production API services. Scaling to multiple concurrent users or integrating with other systems would necessitate a more robust deployment strategy, potentially involving containerization (Docker), orchestration (Kubernetes), a backend API framework (Flask/FastAPI), and load balancing.
 3.  **Lack of Asynchronous Operations**: The current codebase executes synchronously. While sufficient for the relatively low latency of this model's inference, for I/O-bound operations or potentially longer-running model inferences in future iterations, an asynchronous architecture could improve responsiveness and user experience.
-4.  **Limited Model Explainability in Deployment**: Although Logistic Regression coefficients are analyzed in the development notebook, the deployed Streamlit application only provides the prediction and confidence score. Advanced explainability techniques (such as LIME or SHAP not fully implemented) are not exposed to the end-user. This limits the transparency and trustworthiness of individual predictions for non-technical users or counselors.
+4.  **Limited Model Explainability in Deployment**: Although Logistic Regression coefficients are analyzed in the development notebook, the deployed Streamlit application only provides the prediction and confidence score. Advanced explainability techniques (e.g., LIME or SHAP) are not currently implemented or exposed to the end-user. This limits the transparency and trustworthiness of individual predictions for non-technical users or counselors.
 5.  **Hardcoded Configurations**: Critical configurations, including `RANDOM_SEED`, specific column names, and file paths, are hardcoded within the scripts. This reduces flexibility for different environments, dataset versions, or experimental setups, requiring direct code modification for any changes.
 6.  **No Data Versioning or MLOps**: The project currently lacks explicit mechanisms for data versioning, model versioning, or automated MLOps pipelines. Any updates to the model or changes in the underlying data would require manual retraining, saving, and redeployment, which can be error-prone and time-consuming in a production environment.
 
