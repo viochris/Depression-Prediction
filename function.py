@@ -10,19 +10,6 @@ import joblib
 # GLOBAL CONSTANTS & CONFIGURATIONS
 # ==============================================================================
 RANDOM_SEED = 42
-
-# Define feature categories (excluding the features dropped during selection)
-NUMERIC_COLUMNS = [
-    'Age', 'Academic Pressure', 'CGPA', 'Study Satisfaction', 
-    'Work/Study Hours', 'Financial Stress'
-]
-
-OBJECT_COLUMNS = [
-    'City', 'Profession', 'Sleep Duration', 'Dietary Habits', 
-    'Degree', 'Have you ever had suicidal thoughts ?', 
-    'Family History of Mental Illness'
-]
-
 TARGET_LABELS = ["Not Depressed (0)", "Depressed (1)"]
 
 # ==============================================================================
